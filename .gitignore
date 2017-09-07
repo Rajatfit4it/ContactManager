@@ -1,2 +1,4 @@
 bin
 obj
+/.vs/config/applicationhost.config
+/.vs/ContactManager/v14/.suo
