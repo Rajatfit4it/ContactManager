@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace IDAL
 {
-    public class BaseEntity
+    public interface IContactService
     {
-        public int Id { get; set; }
+
     }
 }

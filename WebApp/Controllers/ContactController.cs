@@ -1,4 +1,5 @@
 ﻿using IDAL;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,10 @@ namespace WebApp.Controllers
             _contactDAL = contactDAL;
         }
         // GET: Contact
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? pageNumber)
         {
             var list = await _contactDAL.GetAll();
-            return View(list);
+            return View(list.ToPagedList(pageNumber ?? 1, 3));
         }
 
         // GET: Contact/Details/5

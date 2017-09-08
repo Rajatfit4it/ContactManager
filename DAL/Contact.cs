@@ -5,6 +5,7 @@ namespace DAL
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using ViewModel;
 
     [Table("Contact")]
     public partial class Contact : BaseEntity
