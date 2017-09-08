@@ -9,11 +9,11 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IContactRepository _contactDAL;
+        private IContactService _contactService;
 
-        public HomeController(IContactRepository contactDAL)
+        public HomeController(IContactService contactService)
         {
-            _contactDAL = contactDAL;
+            _contactService = contactService;
         }
         // GET: Home
         public ActionResult Index()

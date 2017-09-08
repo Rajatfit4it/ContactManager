@@ -1,5 +1,6 @@
 ﻿using DAL;
 using IDAL;
+using Service;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
@@ -20,9 +21,9 @@ namespace WebApp.Infrastructure
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             // Register your types, for instance:
-            container.Register<IContactRepository, ContactRepository>(Lifestyle.Scoped);
+            container.Register<IContactService, ContactService>(Lifestyle.Scoped);
+            container.Register<IRepository<Contact>, Repository<Contact>>(Lifestyle.Scoped);
             container.Register<ContactDB, ContactDB>(Lifestyle.Scoped);
-
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 

@@ -12,16 +12,16 @@ namespace WebApp.Controllers
 {
     public class ContactController : Controller
     {
-        private IContactRepository _contactDAL;
+        private IContactService _contactService;
 
-        public ContactController(IContactRepository contactDAL)
+        public ContactController(IContactService contactService)
         {
-            _contactDAL = contactDAL;
+            _contactService = contactService;
         }
         // GET: Contact
         public async Task<ActionResult> Index(int? pageNumber)
         {
-            var list = await _contactDAL.GetAll();
+            var list = await _contactService.GetAll();
             return View(list.ToPagedList(pageNumber ?? 1, 3));
         }
 
@@ -31,7 +31,7 @@ namespace WebApp.Controllers
             ContactVM vm = new ContactVM();
             try
             {
-                vm = await _contactDAL.Get(id);
+                vm = await _contactService.Get(id);
                 if (vm != null)
                     return View(vm);
             }
@@ -55,7 +55,7 @@ namespace WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    int Id = await _contactDAL.Add(vm);
+                    int Id = await _contactService.Add(vm);
                     if (Id > 0)
                     {
                         TempData["SuccessInfo"] = "Record Created Successfully!!!";
@@ -76,7 +76,7 @@ namespace WebApp.Controllers
             ContactVM vm = new ContactVM();
             try
             {
-                vm = await _contactDAL.Get(id);
+                vm = await _contactService.Get(id);
                 if (vm != null)
                     return View(vm);
             }
@@ -94,7 +94,7 @@ namespace WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    bool IsSuccess = await _contactDAL.Update(vm);
+                    bool IsSuccess = await _contactService.Update(vm);
                     if (IsSuccess)
                     {
                         TempData["SuccessInfo"] = "Record Updated Successfully!!!";
