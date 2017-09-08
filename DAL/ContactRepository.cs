@@ -12,7 +12,7 @@ namespace DAL
     public class ContactRepository : IContactRepository
     {
         private ContactDB _dbContext;
-        private Repository<Contact> _repository;
+        private IRepository<Contact> _repository;
 
         public ContactRepository(ContactDB dbContext)
         {
@@ -46,14 +46,11 @@ namespace DAL
         {
             List<ContactVM> list = new List<ContactVM>();
             var collection = await _repository.GetAll();
-            await Task.Run(() =>
+            foreach (var item in collection)
             {
-                foreach (var item in collection)
-                {
-                    ContactVM vmContact = Mapper.Map<ContactVM>(item);
-                    list.Add(vmContact);
-                };
-            });
+                ContactVM vmContact = Mapper.Map<ContactVM>(item);
+                list.Add(vmContact);
+            };
 
             return list;
         }
@@ -62,14 +59,11 @@ namespace DAL
         {
             List<ContactVM> list = new List<ContactVM>();
             var collection = await _repository.GetAll();
-            await Task.Run(() =>
+            foreach (var item in collection.Skip((pageno - 1) * rows).Take(rows))
             {
-                foreach (var item in collection.Skip((pageno - 1) * rows).Take(rows))
-                {
-                    ContactVM vmContact = Mapper.Map<ContactVM>(item);
-                    list.Add(vmContact);
-                };
-            });
+                ContactVM vmContact = Mapper.Map<ContactVM>(item);
+                list.Add(vmContact);
+            };
 
             return list;
         }

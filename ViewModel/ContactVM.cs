@@ -14,8 +14,10 @@ namespace ViewModel
         [Required]
         public string Name { get; set; }
 
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNo { get; set; }
     }
 }

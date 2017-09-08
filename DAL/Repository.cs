@@ -19,11 +19,11 @@ namespace DAL
         }
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await Task.Run(() => entities.AsEnumerable());
+            return await entities.ToListAsync();
         }
         public async Task<T> Get(int id)
         {
-            return await Task.Run(() => entities.SingleOrDefault(s => s.Id == id));
+            return await entities.SingleOrDefaultAsync(s => s.Id == id);
         }
         public async Task<int> Add(T entity)
         {
