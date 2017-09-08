@@ -11,16 +11,16 @@ namespace WebApp.Controllers
 {
     public class ContactController : Controller
     {
-        private IContactDAL _contactDAL;
+        private IContactRepository _contactDAL;
 
-        public ContactController(IContactDAL contactDAL)
+        public ContactController(IContactRepository contactDAL)
         {
             _contactDAL = contactDAL;
         }
         // GET: Contact
         public async Task<ActionResult> Index()
         {
-            var list = await _contactDAL.GetAllContacts();
+            var list = await _contactDAL.GetAll();
             return View(list);
         }
 
@@ -30,7 +30,7 @@ namespace WebApp.Controllers
             ContactVM vm = new ContactVM();
             try
             {
-                vm = await _contactDAL.GetContactById(id);
+                vm = await _contactDAL.Get(id);
                 if (vm != null)
                     return View(vm);
             }
@@ -56,7 +56,10 @@ namespace WebApp.Controllers
                 {
                     int Id = await _contactDAL.Add(vm);
                     if (Id > 0)
+                    {
+                        TempData["SuccessInfo"] = "Record Created Successfully!!!";
                         return RedirectToAction("Index");
+                    }
                 }
             }
             catch
@@ -72,7 +75,7 @@ namespace WebApp.Controllers
             ContactVM vm = new ContactVM();
             try
             {
-                vm = await _contactDAL.GetContactById(id);
+                vm = await _contactDAL.Get(id);
                 if (vm != null)
                     return View(vm);
             }
@@ -92,7 +95,10 @@ namespace WebApp.Controllers
                 {
                     bool IsSuccess = await _contactDAL.Update(vm);
                     if (IsSuccess)
+                    {
+                        TempData["SuccessInfo"] = "Record Updated Successfully!!!";
                         return RedirectToAction("Index");
+                    }
                 }
             }
             catch

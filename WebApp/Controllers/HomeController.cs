@@ -9,9 +9,9 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IContactDAL _contactDAL;
+        private IContactRepository _contactDAL;
 
-        public HomeController(IContactDAL contactDAL)
+        public HomeController(IContactRepository contactDAL)
         {
             _contactDAL = contactDAL;
         }

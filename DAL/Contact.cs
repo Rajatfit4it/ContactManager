@@ -7,10 +7,8 @@ namespace DAL
     using System.Data.Entity.Spatial;
 
     [Table("Contact")]
-    public partial class Contact
+    public partial class Contact : BaseEntity
     {
-        public int Id { get; set; }
-
         [StringLength(50)]
         public string Name { get; set; }
 

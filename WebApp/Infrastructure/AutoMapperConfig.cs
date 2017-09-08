@@ -15,7 +15,6 @@ namespace WebApp.Infrastructure
             Mapper.Initialize(e =>
             {
                 e.CreateMap<ContactVM, Contact>().ReverseMap();
-
             });
         }
     }

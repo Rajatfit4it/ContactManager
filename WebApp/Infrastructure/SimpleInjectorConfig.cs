@@ -20,7 +20,8 @@ namespace WebApp.Infrastructure
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             // Register your types, for instance:
-            container.Register<IContactDAL, ContactDAL>(Lifestyle.Scoped);
+            container.Register<IContactRepository, ContactRepository>(Lifestyle.Scoped);
+            container.Register<ContactDB, ContactDB>(Lifestyle.Scoped);
 
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
