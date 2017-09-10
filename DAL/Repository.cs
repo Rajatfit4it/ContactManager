@@ -11,10 +11,10 @@ namespace DAL
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly ContactDB context;
+        private readonly IDbContext context;
         private DbSet<T> entities;
         string errorMessage = string.Empty;
-        public Repository(ContactDB context)
+        public Repository(IDbContext context)
         {
             this.context = context;
             entities = context.Set<T>();
@@ -43,7 +43,8 @@ namespace DAL
             {
                 return false;
             }
-            context.Entry(entity).State = EntityState.Modified;
+
+            ((DbContext)context).Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return true;
         }

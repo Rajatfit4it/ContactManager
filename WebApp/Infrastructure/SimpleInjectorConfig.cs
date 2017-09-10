@@ -23,7 +23,7 @@ namespace WebApp.Infrastructure
             // Register your types, for instance:
             container.Register<IContactService, ContactService>(Lifestyle.Scoped);
             container.Register<IRepository<Contact>, Repository<Contact>>(Lifestyle.Scoped);
-            container.Register<ContactDB, ContactDB>(Lifestyle.Scoped);
+            container.Register<IDbContext, ContactDB>(Lifestyle.Scoped);
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 

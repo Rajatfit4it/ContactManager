@@ -12,12 +12,10 @@ namespace Service
 {
     public class ContactService : IContactService
     {
-        private ContactDB _dbContext;
         private IRepository<Contact> _repository;
 
-        public ContactService(ContactDB dbContext,IRepository<Contact> repository)
+        public ContactService(IRepository<Contact> repository)
         {
-            _dbContext = dbContext;
             _repository = repository;
         }
         public async Task<int> Add(ContactVM vmContact)
