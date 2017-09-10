@@ -25,6 +25,7 @@ namespace Service
 
             Contact dbContact = Mapper.Map<Contact>(vmContact);
             await _repository.Add(dbContact);
+            
             return dbContact.Id;
 
         }
@@ -34,6 +35,7 @@ namespace Service
             var contact = await _repository.Get(vmContact.Id);
             if (contact == null)
                 return false;
+            /*question: Why automapper doesn't work here?*/
             contact.Name = vmContact.Name;
             contact.Email = vmContact.Email;
             contact.PhoneNo = vmContact.PhoneNo;
@@ -44,26 +46,30 @@ namespace Service
         public async Task<IEnumerable<ContactVM>> GetAll()
         {
             List<ContactVM> list = new List<ContactVM>();
-            var collection = await _repository.GetAll();
-            foreach (var item in collection)
+            var collection = _repository.GetAll();
+            await Task.Run(() =>
             {
-                ContactVM vmContact = Mapper.Map<ContactVM>(item);
-                list.Add(vmContact);
-            };
-
+                foreach (var item in collection)
+                {
+                    ContactVM vmContact = Mapper.Map<ContactVM>(item);
+                    list.Add(vmContact);
+                };
+            });
             return list;
         }
 
         public async Task<IEnumerable<ContactVM>> GetAll(int pageno, int rows)
         {
             List<ContactVM> list = new List<ContactVM>();
-            var collection = await _repository.GetAll();
-            foreach (var item in collection.Skip((pageno - 1) * rows).Take(rows))
+            var collection = _repository.GetAll();
+            await Task.Run(() =>
             {
-                ContactVM vmContact = Mapper.Map<ContactVM>(item);
-                list.Add(vmContact);
-            };
-
+                foreach (var item in collection.Skip((pageno - 1) * rows).Take(rows))
+                {
+                    ContactVM vmContact = Mapper.Map<ContactVM>(item);
+                    list.Add(vmContact);
+                };
+            });
             return list;
         }
 

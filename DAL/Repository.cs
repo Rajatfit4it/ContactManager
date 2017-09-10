@@ -19,9 +19,9 @@ namespace DAL
             this.context = context;
             entities = context.Set<T>();
         }
-        public async Task<IEnumerable<T>> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return await entities.ToListAsync();
+            return entities.AsQueryable();
         }
         public async Task<T> Get(int id)
         {

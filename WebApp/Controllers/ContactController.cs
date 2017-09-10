@@ -21,6 +21,8 @@ namespace WebApp.Controllers
         // GET: Contact
         public async Task<ActionResult> Index(int? pageNumber)
         {
+            if (TempData["SuccessMessage"] != null)
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
             var list = await _contactService.GetAll();
             return View(list.ToPagedList(pageNumber ?? 1, 3));
         }
@@ -58,7 +60,7 @@ namespace WebApp.Controllers
                     int Id = await _contactService.Add(vm);
                     if (Id > 0)
                     {
-                        TempData["SuccessInfo"] = "Record Created Successfully!!!";
+                        TempData["SuccessMessage"] = "Record Created Successfully!!!";
                         return RedirectToAction("Index");
                     }
                 }
@@ -82,6 +84,7 @@ namespace WebApp.Controllers
             }
             catch
             {
+                
             }
             return View(vm);
         }
@@ -97,13 +100,14 @@ namespace WebApp.Controllers
                     bool IsSuccess = await _contactService.Update(vm);
                     if (IsSuccess)
                     {
-                        TempData["SuccessInfo"] = "Record Updated Successfully!!!";
+                        TempData["SuccessMessage"] = "Record Updated Successfully!!!";
                         return RedirectToAction("Index");
                     }
                 }
             }
             catch
             {
+                ViewBag.ErrorMessage = "There was some error while updating the record.";
             }
             ModelState.AddModelError("err", "Some error occured");
             return View(vm);

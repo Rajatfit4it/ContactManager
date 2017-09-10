@@ -9,7 +9,7 @@ namespace IDAL
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        Task<IEnumerable<T>> GetAll();
+        IQueryable<T> GetAll();
         Task<T> Get(int id);
         Task<int> Add(T entity);
         Task<bool> Update(T entity);
