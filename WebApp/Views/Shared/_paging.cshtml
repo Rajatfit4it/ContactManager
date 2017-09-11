@@ -1,0 +1,43 @@
+﻿@model WebApp.Models.PagingModel
+
+
+@if (Model.PageLength > 0)
+{
+    <nav aria-label="Page">
+        <ul class="pagination">
+            @if (Model.CurrentPage != 1)
+            {
+                <li class="page-item">
+                    @Html.ActionLink("First", Model.ActionName, Model.ControllerName, new { pageNumber = 1 }, new { @class = "page-link" })
+                </li>
+                <li class="page-item">
+                    @Html.ActionLink("<<", Model.ActionName, Model.ControllerName, new { pageNumber = Model.CurrentPage - 1 }, new { @class = "page-link", @title = "Previous" })
+                </li>
+            }
+            @{ 
+                int start = Model.CurrentPage > 3 ? Model.CurrentPage - 2 : 1;
+                int end = (Model.CurrentPage + 2) >= Model.PageLength ? Model.PageLength : Model.CurrentPage + 2;
+            }
+
+            @for (int i = start; i <= end; i++)
+            {
+                string activeclass = (i == Model.CurrentPage) ? "active" : string.Empty;
+                <li class="page-item @activeclass">
+                    @Html.ActionLink(i.ToString(), Model.ActionName, Model.ControllerName, new { pageNumber = i }, new { @class = "page-link" })
+                </li>
+            }
+
+            @if (Model.CurrentPage != Model.PageLength)
+            {
+                <li class="page-item">
+                    @Html.ActionLink(">>", Model.ActionName, Model.ControllerName, new { pageNumber = Model.CurrentPage + 1 }, new { @class = "page-link", @title = "Next" })
+                </li>
+                <li class="page-item">
+                    @Html.ActionLink("Last", Model.ActionName, Model.ControllerName, new { pageNumber = Model.PageLength }, new { @class = "page-link" })
+                </li>
+            }
+
+        </ul>
+    </nav>
+
+}

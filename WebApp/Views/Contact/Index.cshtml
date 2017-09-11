@@ -47,5 +47,7 @@
     pageNumber
 }))
 
+@*@Html.Partial("_paging", new WebApp.Models.PagingModel() { ActionName = "Index", ControllerName = "Contact", CurrentPage = 13, TotalRecords = 143, RecordsPerPage = 10 })*@
+
 @Html.Partial("_ToasterView")
 
