@@ -171,6 +171,7 @@
     <Content Include="Views\Shared\_ToasterView.cshtml" />
     <Content Include="Views\Shared\_paging.cshtml" />
     <Content Include="Views\Contact\_ContactList.cshtml" />
+    <Content Include="Views\Contact\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

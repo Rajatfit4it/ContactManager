@@ -13,7 +13,6 @@ namespace DAL.IRepositories
         Task<T> Get(int id);
         Task<int> Add(T entity);
         Task<bool> Update(T entity);
-
-        //Task<void> Delete(int id);
+        Task<bool> Delete(T entity);
     }
 }

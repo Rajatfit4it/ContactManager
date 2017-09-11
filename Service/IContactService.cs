@@ -20,5 +20,7 @@ namespace Service
         Task<ContactVM> Get(int Id);
 
         Task<int> GetTotalRecordsCount();
+
+        Task<bool> Delete(int Id);
     }
 }

@@ -25,6 +25,9 @@ namespace WebApp.Controllers
             if (TempData["SuccessMessage"] != null)
                 ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
 
+            if (TempData["ErrorMessage"] != null)
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+
             int PageNo = pageNumber ?? 1;
 
             var list = await _contactService.GetAll(PageNo, Common.RecordsPerPage);
@@ -76,8 +79,8 @@ namespace WebApp.Controllers
             }
             catch
             {
+                ViewBag.ErrorMessage = "There was some error while creating the record.";
             }
-            ModelState.AddModelError("err", "Some error occured");
             return View(vm);
         }
 
@@ -95,7 +98,8 @@ namespace WebApp.Controllers
             {
                 
             }
-            return View(vm);
+            TempData["ErrorMessage"] = "No Record Found!!!";
+            return RedirectToAction("Index");
         }
 
         // POST: Contact/Edit/5
@@ -118,30 +122,49 @@ namespace WebApp.Controllers
             {
                 ViewBag.ErrorMessage = "There was some error while updating the record.";
             }
-            ModelState.AddModelError("err", "Some error occured");
             return View(vm);
         }
 
+        [HttpGet]
         // GET: Contact/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            if (TempData["ErrorMessage"] != null)
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+
+            ContactVM vm = new ContactVM();
+            try
+            {
+                vm = await _contactService.Get(id);
+                if (vm != null)
+                    return View(vm);
+            }
+            catch
+            {
+
+            }
+            TempData["ErrorMessage"] = "No Record Found!!!";
+            return RedirectToAction("Index");
         }
 
         // POST: Contact/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> DeleteConfirm(int id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                bool IsSuccess = await _contactService.Delete(id);
+                if (IsSuccess)
+                {
+                    TempData["SuccessMessage"] = "Record deleted successfully!!!";
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
             }
+            TempData["ErrorMessage"] = "Some error occured.";
+            return RedirectToAction("Delete", new { id = id });
         }
     }
 }

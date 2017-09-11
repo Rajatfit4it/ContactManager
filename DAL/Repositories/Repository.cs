@@ -48,14 +48,15 @@ namespace DAL.Repositories
             await context.SaveChangesAsync();
             return true;
         }
-        //public void Delete(T entity)
-        //{
-        //    if (entity == null)
-        //    {
-        //        throw new ArgumentNullException("entity");
-        //    }
-        //    entities.Remove(entity);
-        //    context.SaveChanges();
-        //}
+        public async Task<bool> Delete(T entity)
+        {
+            if (entity == null)
+            {
+                return false;
+            }
+            entities.Remove(entity);
+            await context.SaveChangesAsync();
+            return true;
+        }
     }
 }

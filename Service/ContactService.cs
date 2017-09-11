@@ -91,5 +91,11 @@ namespace Service
             return vmContact;
 
         }
+
+        public async Task<bool> Delete(int Id)
+        {
+            var contact = await _repository.Get(Id);
+            return await _repository.Delete(contact);
+        }
     }
 }
