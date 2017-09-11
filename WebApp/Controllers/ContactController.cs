@@ -23,6 +23,7 @@ namespace WebApp.Controllers
         {
             if (TempData["SuccessMessage"] != null)
                 ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+
             var list = await _contactService.GetAll();
             return View(list.ToPagedList(pageNumber ?? 1, 3));
         }
