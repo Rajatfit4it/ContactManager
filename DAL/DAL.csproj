@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactDBInitializer.cs" />
     <Compile Include="DBModel\Contact.cs" />
     <Compile Include="ContactDB.cs" />
     <Compile Include="IDbContext.cs" />

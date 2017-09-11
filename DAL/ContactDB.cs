@@ -11,6 +11,7 @@ namespace DAL
         public ContactDB()
             : base("name=ContactDB")
         {
+            Database.SetInitializer(new ContactDBInitializer());
         }
 
         public virtual DbSet<Contact> Contacts { get; set; }
