@@ -52,16 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactService.cs" />
+    <Compile Include="IContactService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{c2a99a3d-a81e-4c5f-b07e-f640097f10c3}</Project>
       <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IDAL\IDAL.csproj">
-      <Project>{72e98b8a-7aaf-4ac3-a71a-00e653f1b74f}</Project>
-      <Name>IDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{6019a781-161c-44e5-a082-89b50a14fde0}</Project>

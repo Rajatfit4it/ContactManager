@@ -1,4 +1,4 @@
-﻿using IDAL;
+﻿using DAL.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel;
 
-namespace DAL
+namespace DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {

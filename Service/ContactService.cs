@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DAL;
-using IDAL;
+using DAL.DBModel;
+using DAL.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace Service
     public class ContactService : IContactService
     {
         private IRepository<Contact> _repository;
+        private IContactRepository _contactRepository;
 
-        public ContactService(IRepository<Contact> repository)
+        public ContactService(IRepository<Contact> repository, IContactRepository contactrepository)
         {
             _repository = repository;
+            _contactRepository = contactrepository;
         }
         public async Task<int> Add(ContactVM vmContact)
         {
@@ -49,7 +52,7 @@ namespace Service
             var collection = _repository.GetAll();
             await Task.Run(() =>
             {
-                foreach (var item in collection)
+                foreach (var item in collection.OrderBy(e => e.Id))
                 {
                     ContactVM vmContact = Mapper.Map<ContactVM>(item);
                     list.Add(vmContact);
@@ -64,13 +67,18 @@ namespace Service
             var collection = _repository.GetAll();
             await Task.Run(() =>
             {
-                foreach (var item in collection.Skip((pageno - 1) * rows).Take(rows))
+                foreach (var item in collection.OrderBy(e => e.Id).Skip((pageno - 1) * rows).Take(rows))
                 {
                     ContactVM vmContact = Mapper.Map<ContactVM>(item);
                     list.Add(vmContact);
                 };
             });
             return list;
+        }
+
+        public async Task<int> GetTotalRecordsCount()
+        {
+            return await _contactRepository.GetTotalRecordsCount();
         }
 
         public async Task<ContactVM> Get(int Id)

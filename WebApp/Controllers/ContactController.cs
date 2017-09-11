@@ -1,5 +1,5 @@
-﻿using IDAL;
-using PagedList;
+﻿using PagedList;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ViewModel;
+using WebApp.Models;
 
 namespace WebApp.Controllers
 {
@@ -24,8 +25,15 @@ namespace WebApp.Controllers
             if (TempData["SuccessMessage"] != null)
                 ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
 
-            var list = await _contactService.GetAll();
-            return View(list.ToPagedList(pageNumber ?? 1, 3));
+            int PageNo = pageNumber ?? 1;
+
+            var list = await _contactService.GetAll(PageNo, Common.RecordsPerPage);
+            int TotalRecords = await _contactService.GetTotalRecordsCount();
+
+            var pager = new PagingModel() { ActionName = "Index", ControllerName = "Contact", CurrentPage = PageNo, TotalRecords = TotalRecords, RecordsPerPage = Common.RecordsPerPage };
+            ContactListViewModel model = new ContactListViewModel() {list = list, pager = pager };
+
+            return View(model);
         }
 
         // GET: Contact/Details/5

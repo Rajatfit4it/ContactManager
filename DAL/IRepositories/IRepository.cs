@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel;
 
-namespace IDAL
+namespace DAL.IRepositories
 {
     public interface IRepository<T> where T : BaseEntity
     {

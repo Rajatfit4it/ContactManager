@@ -1,5 +1,6 @@
-﻿using DAL;
-using IDAL;
+﻿using DAL.Repositories;
+using DAL.IRepositories;
+using DAL;
 using Service;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using DAL.DBModel;
 
 namespace WebApp.Infrastructure
 {
@@ -24,6 +26,7 @@ namespace WebApp.Infrastructure
             container.Register<IContactService, ContactService>(Lifestyle.Scoped);
             container.Register<IRepository<Contact>, Repository<Contact>>(Lifestyle.Scoped);
             container.Register<IDbContext, ContactDB>(Lifestyle.Scoped);
+            container.Register<IContactRepository, ContactRepository>(Lifestyle.Scoped);
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 

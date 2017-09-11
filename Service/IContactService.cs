@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel;
 
-namespace IDAL
+namespace Service
 {
     public interface IContactService
     {
@@ -18,5 +18,7 @@ namespace IDAL
         Task<IEnumerable<ContactVM>> GetAll(int pageno, int rows);
 
         Task<ContactVM> Get(int Id);
+
+        Task<int> GetTotalRecordsCount();
     }
 }

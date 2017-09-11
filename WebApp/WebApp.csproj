@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -156,6 +157,7 @@
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfig.cs" />
     <Compile Include="Infrastructure\SimpleInjectorConfig.cs" />
+    <Compile Include="Models\ContactListViewModel.cs" />
     <Compile Include="Models\PagingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -168,6 +170,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_ToasterView.cshtml" />
     <Content Include="Views\Shared\_paging.cshtml" />
+    <Content Include="Views\Contact\_ContactList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -182,10 +185,6 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{c2a99a3d-a81e-4c5f-b07e-f640097f10c3}</Project>
       <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IDAL\IDAL.csproj">
-      <Project>{72e98b8a-7aaf-4ac3-a71a-00e653f1b74f}</Project>
-      <Name>IDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{565163da-5e01-4064-8f75-fee259996b3a}</Project>

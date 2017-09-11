@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DAL;
+using DAL.DBModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

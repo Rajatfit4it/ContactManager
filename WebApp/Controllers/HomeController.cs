@@ -1,5 +1,4 @@
-﻿using IDAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,11 +8,9 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IContactService _contactService;
 
-        public HomeController(IContactService contactService)
+        public HomeController()
         {
-            _contactService = contactService;
         }
         // GET: Home
         public ActionResult Index()

@@ -1,4 +1,4 @@
-namespace DAL
+namespace DAL.DBModel
 {
     using System;
     using System.Collections.Generic;
