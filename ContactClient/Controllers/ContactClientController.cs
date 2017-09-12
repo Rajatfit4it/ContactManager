@@ -13,6 +13,11 @@ namespace ContactClient.Controllers
 {
     public class ContactClientController : Controller
     {
+        private string _ContactApiBaseUrl;
+        public ContactClientController()
+        {
+            _ContactApiBaseUrl = "http://localhost:59670/api/contact/";
+        }
         // GET: ContactClient
         public async Task<ActionResult> Index()
         {
@@ -27,7 +32,7 @@ namespace ContactClient.Controllers
             {
                 try
                 {
-                    string url = "http://localhost:59670/api/contact";
+                    string url = _ContactApiBaseUrl;
                     var result = await client.GetAsync(url);
                     string resultContent = await result.Content.ReadAsStringAsync();
                     list = JsonConvert.DeserializeObject<List<ContactVM>>(resultContent);
@@ -48,7 +53,7 @@ namespace ContactClient.Controllers
             try
             {
                 var client = new HttpClient();
-                string url = "http://localhost:59670/api/contact/"+id;
+                string url = _ContactApiBaseUrl + id;
                 var result = await client.GetAsync(url);
                 string resultContent = await result.Content.ReadAsStringAsync();
                 vm = JsonConvert.DeserializeObject<ContactVM>(resultContent);
@@ -76,7 +81,7 @@ namespace ContactClient.Controllers
                 if (ModelState.IsValid)
                 {
                     var client = new HttpClient();
-                    string url = "http://localhost:59670/api/contact/";
+                    string url = _ContactApiBaseUrl;
                     var content = JsonConvert.SerializeObject(vm);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
@@ -107,7 +112,7 @@ namespace ContactClient.Controllers
             try
             {
                 var client = new HttpClient();
-                string url = "http://localhost:59670/api/contact/" + id;
+                string url = _ContactApiBaseUrl + id;
                 var result = await client.GetAsync(url);
                 string resultContent = await result.Content.ReadAsStringAsync();
                 vm = JsonConvert.DeserializeObject<ContactVM>(resultContent);
@@ -131,7 +136,7 @@ namespace ContactClient.Controllers
                 if (ModelState.IsValid)
                 {
                     var client = new HttpClient();
-                    string url = "http://localhost:59670/api/contact/";
+                    string url = _ContactApiBaseUrl;
                     var content = JsonConvert.SerializeObject(vm);
                     var buffer = System.Text.Encoding.UTF8.GetBytes(content);
                     var byteContent = new ByteArrayContent(buffer);
@@ -165,7 +170,7 @@ namespace ContactClient.Controllers
             try
             {
                 var client = new HttpClient();
-                string url = "http://localhost:59670/api/contact/" + id;
+                string url = _ContactApiBaseUrl + id;
                 var result = await client.GetAsync(url);
                 string resultContent = await result.Content.ReadAsStringAsync();
                 vm = JsonConvert.DeserializeObject<ContactVM>(resultContent);
@@ -188,7 +193,7 @@ namespace ContactClient.Controllers
             try
             {
                 var client = new HttpClient();
-                string url = "http://localhost:59670/api/contact/" + id;
+                string url = _ContactApiBaseUrl + id;
                 var result = await client.DeleteAsync(url);
                 string resultContent = await result.Content.ReadAsStringAsync();
                 bool IsSuccess = JsonConvert.DeserializeObject<bool>(resultContent);
