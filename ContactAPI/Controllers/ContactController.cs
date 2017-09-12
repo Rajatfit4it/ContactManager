@@ -19,6 +19,7 @@ namespace ContactAPI.Controllers
             _contactService = contactService;
         }
         // GET: api/Contact
+        [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
             var list = await _contactService.GetAll();
@@ -29,25 +30,47 @@ namespace ContactAPI.Controllers
         }
 
         // GET: api/Contact/5
-        public string Get(int id)
+        [HttpGet]
+        public async Task<IHttpActionResult> Get(int id)
         {
-            return "value";
+            var contact = await _contactService.Get(id);
+            if (contact != null)
+                return Ok(contact);
+
+            return NotFound();
         }
 
         // POST: api/Contact
-        public void Post(ContactVM contactVM)
+        [HttpPost]
+        public async Task<IHttpActionResult> Post(ContactVM vmContact)
         {
+            var Id = await _contactService.Add(vmContact);
+            if (Id > 0)
+                return Ok(Id);
 
+            return BadRequest("Some error occured while creating record");
         }
 
         // PUT: api/Contact/5
-        public void Put(int id, ContactVM contactVM)
+        [HttpPut]
+        public async Task<IHttpActionResult> Put(ContactVM vmContact)
         {
+            bool IsSuccess = await _contactService.Update(vmContact);
+            if (IsSuccess)
+                return Ok("Record updated successfully!!!");
+
+            return NotFound();
         }
 
         // DELETE: api/Contact/5
-        public void Delete(int id)
+        [HttpDelete]
+        public async Task<IHttpActionResult> Delete(int id)
         {
+            var IsSuccess = await _contactService.Delete(id);
+            if (IsSuccess)
+                return Ok("Record deleted successfully");
+
+            return NotFound();
         }
     }
 }
