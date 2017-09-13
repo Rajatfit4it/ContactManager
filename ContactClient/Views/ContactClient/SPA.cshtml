@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div data-ng-app="RESTClientModule">
+    <div ng-controller="AngularJs_ContactController">
+
+        <table class="table">
+            <tr>
+                <th> ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>PhoneNo</th>
+                <th></th>
+            </tr>
+            <tbody data-ng-repeat="contact in Contacts">
+                <tr>
+                    <td><span>{{contact.Id}}</span></td>
+                    <td><span>{{contact.Name}}</span></td>
+                    <td><span>{{contact.Email}}</span></td>
+                    <td><span>{{contact.PhoneNo}}</span></td>
+                    <td><span><a href="#" ng-click="PrepareEdit(contact)">Edit</a></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="~/Scripts/AngScripts/Modules.js"></script>
+    <script src="~/Scripts/AngScripts/Controller.js"></script>

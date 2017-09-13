@@ -209,5 +209,10 @@ namespace ContactClient.Controllers
             TempData["ErrorMessage"] = "Some error occured.";
             return RedirectToAction("Delete", new { id = id });
         }
+
+        public ActionResult SPA()
+        {
+            return View();
+        }
     }
 }
