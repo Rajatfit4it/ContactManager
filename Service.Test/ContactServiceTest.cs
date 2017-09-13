@@ -5,6 +5,7 @@ using ViewModel;
 using Moq;
 using DAL.IRepositories;
 using DAL;
+using AutoMapper;
 
 namespace Service.Test
 {
@@ -21,6 +22,11 @@ namespace Service.Test
             _dbContext = new Mock<IDbContext>();
             _repository = new Mock<IRepository<Contact>>();
             _contactRepository = new Mock<IContactRepository>();
+            Mapper.Initialize(e =>
+            {
+                e.CreateMap<ContactVM, Contact>().ReverseMap();
+            });
+
         }
 
         [TestMethod]
@@ -59,7 +65,7 @@ namespace Service.Test
             //_repository.Setup(x => x.Map<Contact, ContactVM>(It.IsAny<Contact>)).Returns(expectedResult);
             ContactVM contactvm = _contactService.Get(3).Result;
             Assert.IsNotNull(contactvm);
-            Assert.Equals(contactvm.Name, "Third");
+            Assert.AreEqual(contactvm.Name, "Third");
 
         }
 
