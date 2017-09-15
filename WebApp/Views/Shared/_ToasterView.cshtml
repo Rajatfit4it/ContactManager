@@ -3,13 +3,13 @@
     @{
         string toastrSuccessMsg = string.Empty;
         string toastrErrorMsg = string.Empty;
-        if (TempData["SuccessMessage"] != null)
+        if (ViewBag.SuccessMessage != null)
         {
-            toastrSuccessMsg = TempData["SuccessMessage"].ToString();
+            toastrSuccessMsg = ViewBag.SuccessMessage.ToString();
         }
-        if (TempData["ErrorMessage"] != null)
+        if (ViewBag.ErrorMessage != null)
         {
-            toastrErrorMsg = TempData["ErrorMessage"].ToString();
+            toastrErrorMsg = ViewBag.ErrorMessage.ToString();
         }
     }
     $(document).ready(function () {

@@ -27,6 +27,8 @@ namespace WebApp.Infrastructure
             container.Register<IRepository<Contact>, Repository<Contact>>(Lifestyle.Scoped);
             container.Register<IDbContext, ContactDB>(Lifestyle.Scoped);
             container.Register<IContactRepository, ContactRepository>(Lifestyle.Scoped);
+            container.Register<IEventAggregator, EventAggregator>(Lifestyle.Singleton);
+
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 

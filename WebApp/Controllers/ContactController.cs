@@ -7,17 +7,24 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ViewModel;
+using WebApp.Infrastructure;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    
     public class ContactController : Controller
     {
         private IContactService _contactService;
+        private IEventAggregator _eventAggregator;
+        private Publisher _publisher;
 
-        public ContactController(IContactService contactService)
+        public ContactController(IContactService contactService, IEventAggregator eventAggregator)
         {
             _contactService = contactService;
+            _eventAggregator = eventAggregator;
+            _publisher = new Publisher(_eventAggregator);
+      
         }
         // GET: Contact
         public async Task<ActionResult> Index(int? pageNumber)
@@ -114,6 +121,9 @@ namespace WebApp.Controllers
                     if (IsSuccess)
                     {
                         TempData["SuccessMessage"] = "Record Updated Successfully!!!";
+                        CustomMessages msg = new CustomMessages();
+                        msg.Message = "Record Updated Successfully!!!";
+                        await _publisher.PublishMessage(msg);
                         return RedirectToAction("Index");
                     }
                 }

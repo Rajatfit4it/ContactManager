@@ -16,6 +16,8 @@ namespace WebApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             SimpleInjectorConfig.Initialize();
             AutoMapperConfig.ConfigureMappings();
+            SubscriberConfig.Register();
+
         }
     }
 }

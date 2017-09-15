@@ -156,8 +156,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfig.cs" />
+    <Compile Include="Infrastructure\RegisterHandler.cs" />
     <Compile Include="Infrastructure\SimpleInjectorConfig.cs" />
     <Compile Include="Models\ContactListViewModel.cs" />
+    <Compile Include="Models\CustomMessages.cs" />
     <Compile Include="Models\PagingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
