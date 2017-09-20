@@ -15,7 +15,7 @@ namespace WebApp
 
             routes.MapRoute(
                 name: "Default2",
-                url: "{controller}/{action}/{pageNumber}",
+                url: "Contact/Index/{pageNumber}",
                 defaults: new { controller = "Contact", action = "Index", pageNumber = UrlParameter.Optional }
 
             );
