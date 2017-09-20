@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApp.Models;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace WebApp.Infrastructure
 {
@@ -20,7 +22,11 @@ namespace WebApp.Infrastructure
 
         static void SubscriberActionMethod(CustomMessages msg)
         {
-            var abc = 123;
+            var Clients = GlobalHost.ConnectionManager.GetHubContext<ContactHub>().Clients;
+            Clients.All.broadcastMessage(msg.Message);
+
+            //ContactHub hub = new ContactHub();
+            //hub.GenerateNotification(msg);
         }
 
 

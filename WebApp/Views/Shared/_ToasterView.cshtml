@@ -1,4 +1,6 @@
-﻿
+﻿<script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
+
 <script>
     @{
         string toastrSuccessMsg = string.Empty;
@@ -39,5 +41,13 @@
             toastr.error(toastrErrorMsg);
         }
     });
+
+    var chat = $.connection.contactHub;
+
+    chat.client.broadcastMessage = function (message) {
+        toastr.success(message);
+    };
+
+    $.connection.hub.start();
 
 </script>
